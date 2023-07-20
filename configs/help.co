@@ -1,0 +1,16 @@
+define user ask capabilities
+  "What can you do?"
+  "What can you help me with?"
+  "tell me what you can do"
+  "tell me about you"
+  "How can I use your help?"
+  "How can you help me?"
+
+
+define bot inform capabilities
+  "I am an AI assistant which helps answer questions based on a given knowledge base. PDF's or youtube video for this job"
+
+
+define flow
+  user ask capabilities
+  bot inform capabilities  

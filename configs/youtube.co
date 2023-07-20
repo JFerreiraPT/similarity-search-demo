@@ -1,0 +1,17 @@
+define user ask for finance content
+  "What is the current inflation rate?"
+  "Why have they decided to not increase interest rates"
+  "How does such decision impact economy"
+  "Tell me what is the video about"
+
+define bot inform he is asking youtube video
+  "Asking youtube"    
+
+define flow
+  user ask for finance content
+  bot inform he is asking youtube video
+  $answer = execute ask_store_GR(index_name = ask_youtube_index)
+  bot respond $answer
+
+
+  

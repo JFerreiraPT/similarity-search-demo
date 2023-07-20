@@ -1,0 +1,8 @@
+pypdf
+langchain
+faiss-cpu
+sentence_transformers
+openai
+python-dotenv
+pytube
+nemoguardrails

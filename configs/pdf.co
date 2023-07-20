@@ -1,0 +1,28 @@
+define user ask for pdf content
+    "Explain logical operators"
+    "how can i define a function?"
+    "are there async functions?"
+    
+
+define bot inform he is asking pdf information
+  "Asking pdf"
+
+define flow
+  user ask for pdf content
+  bot inform he is asking pdf information
+  $is_authorized = execute is_admin
+  if $is_authorized
+    $answer = execute ask_store_GR(index_name = ask_pdf_index)
+    bot respond $answer
+  else
+    bot inform no permissions  
+
+
+define bot inform no permissions
+  "You don't have permissions to access this pdf"
+
+
+  
+
+
+  
