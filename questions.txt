@@ -15,3 +15,6 @@ What is the best restaurant in Leiria?
 Why did he decide not to increase interest rates?
 Will the interest rates be raised in the future?
 What is the current inflation rate?
+
+
+Git Repo -> https://github.com/JFerreiraPT/similarity-search-demo

@@ -34,7 +34,7 @@ def load_documents_pdf():
 
 
 
-#3 embeddings and store indexes
+#3 Receive chunks, generate embeddings and then  #4 store indexes
 def create_embeddings(documents, index_name):
 
     #create embeddings and index with FAISS help
@@ -60,7 +60,7 @@ def ask_store(vectorStore, query):
     #The top 5 rank documents are then returned
     relevant_docs = vectorStore.similarity_search(query, 5)
 
-    # We will then run ou chain, the chunks are sent to the LLM as context, 
+    # We will then run ou chain, the resulting documents are sent to the LLM as context, 
     # the LLM then interpret the question and answers it based on the provided context
     refined_answer = chain.run(input_documents=relevant_docs, question=query) 
 

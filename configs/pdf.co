@@ -1,9 +1,9 @@
 # This file defines the PDF flow.
 # NeMo-GuardRails should identify that we want to follow this flow,
-# based on the examples below.
+# based on the below examples.
 
-# For this example a guard was set, only authorized users can access the PDF
-# The flow will call an action the verifies if the user is an admin
+# For this example a guard for security was set, only authorized users can access the PDF
+# The flow will call an action that verifies if the user is an admin
 
 define user ask for pdf content
     "Explain logical operators"
