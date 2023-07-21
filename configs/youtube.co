@@ -1,3 +1,6 @@
+# Final configuration file for the YouTube flow.
+# No authorizations needed.
+
 define user ask for finance content
   "What is the current inflation rate?"
   "Why have they decided to not increase interest rates"

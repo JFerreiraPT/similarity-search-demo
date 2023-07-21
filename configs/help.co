@@ -1,3 +1,5 @@
+# This file configures how the "bot" should behave when capabilities are asked
+
 define user ask capabilities
   "What can you do?"
   "What can you help me with?"

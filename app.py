@@ -19,15 +19,35 @@ load_dotenv()
 #define our model for embeddings
 hf_embeddings = HuggingFaceEmbeddings()
 
-
+# We will define our guardrails here.
+# The config folder will be used to configure the instance.
+# We will use guardrails to add some sort of authorization.
+# We will use it also to avoid some off-topics.
+# Guardrails will also choose the next execution step.
 config = RailsConfig.from_path("configs")
 app = LLMRails(config)
 
 
+# ADDED -> Transcribe youtube video
+# This video is from CBS and it's a speech of Fed Chair Jerome Powell speaking after opting not to raise interest rates
+def load_documents_youtube():
 
+    # All the structure is equal to the PDF loader, the only thing that changes is the loader itself
+    loader = YoutubeLoader.from_youtube_url(
+        "https://www.youtube.com/watch?v=2JrgmXrgqlc&ab_channel=CBSNews", add_video_info=True
+    )
 
-vector_store_files = None
-vector_store_Youtube = None
+    text_splitter = RecursiveCharacterTextSplitter(
+        # Set a really small chunk size, just to show.
+        chunk_size = 100,
+        chunk_overlap  = 20,
+        length_function = len,
+    )
+
+    documents = loader.load_and_split(text_splitter)
+
+    return documents
+
 
 
 #1 Load documents and #2 create chunks
@@ -46,6 +66,7 @@ def load_documents_pdf():
     chunks = loader.load_and_split(text_splitter)
     return chunks
 
+
 #3 embeddings
 def create_embeddings(documents, index_name):
 
@@ -56,6 +77,8 @@ def create_embeddings(documents, index_name):
     vectorStore.save_local(index_name)
     return vectorStore
 
+
+
 def ask_store(vectorStore, query):
 
     chain = load_qa_chain(OpenAI(), chain_type="stuff")
@@ -64,7 +87,6 @@ def ask_store(vectorStore, query):
     refined_answer = chain.run(input_documents=relevant_docs, question=query) 
 
     return refined_answer
-
 
 
 async def ask_store_GR(index_name, query):
@@ -90,22 +112,7 @@ async def ask_store_GR(index_name, query):
     return prompt_text
 
 
-def load_documents_youtube():
 
-    loader = YoutubeLoader.from_youtube_url(
-        "https://www.youtube.com/watch?v=2JrgmXrgqlc&ab_channel=CBSNews", add_video_info=True
-    )
-
-    text_splitter = RecursiveCharacterTextSplitter(
-        # Set a really small chunk size, just to show.
-        chunk_size = 100,
-        chunk_overlap  = 20,
-        length_function = len,
-    )
-
-    documents = loader.load_and_split(text_splitter)
-
-    return documents
 
 def chat():
     while True:
@@ -124,13 +131,14 @@ def chat():
 def program():
     app.register_action(ask_store_GR)
 
+    # A new function was added to create embeddings for the YouTube transcript.
+    # The function we use to create embeddings for the documents is the same; 
+    # now we just specify which is the name for the index.
+
     try:
         FAISS.load_local("ask_pdf_index", hf_embeddings)
     except:
         create_embeddings(load_documents_pdf(), "ask_pdf_index")
-
-    app.register_action_param("pdf_db", vector_store_files)
-     
 
     try:
         FAISS.load_local("ask_youtube_index", hf_embeddings)

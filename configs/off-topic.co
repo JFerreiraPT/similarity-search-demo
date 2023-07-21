@@ -1,3 +1,5 @@
+# This conf file defines some off-topics that we want to avoid
+
 define user ask off topic
   "What stocks should I buy?"
   "Can you recommend the best stocks to buy?"
@@ -6,6 +8,7 @@ define user ask off topic
   "Can you tell me your name?"
   "What's your name?"
   "Can you paint?"
+  "What is the most know dish of Portugal?"
   "Can you tell me a joke?"
   "What is the biggest city in the world"
   "Can you write an email?"
@@ -13,6 +16,7 @@ define user ask off topic
   "Who is the president?"
   "What party will win the elections?"
   "Who should I vote with?"
+
 
 define flow
   user ask off topic

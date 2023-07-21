@@ -1,0 +1,17 @@
+ask_pdf
+-------------------------
+
+Can you explain logical operations to me?
+How can I define a function?
+Can you give me an example of how to define a function?
+Can you give me an example of a while statement?
+
+GuardRails flow
+-----------------------
+How can i use your help?
+What cryptos should i buy?
+What is the best restaurant in Leiria?
+
+Why did he decide not to increase interest rates?
+Will the interest rates be raised in the future?
+What is the current inflation rate?
